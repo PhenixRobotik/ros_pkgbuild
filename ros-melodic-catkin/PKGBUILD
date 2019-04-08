@@ -20,8 +20,8 @@ makedepends=(
 	'ros-build-tools'
 )
 
-conflicts=('python-melodic-catkin')
-provides=('python-melodic-catkin')
+conflicts=('ros-melodic-catkin')
+provides=('ros-melodic-catkin')
 arch=('any')
 source=('git+https://github.com/ros-gbp/catkin-release#branch=release/melodic/catkin')
 sha256sums=('SKIP')

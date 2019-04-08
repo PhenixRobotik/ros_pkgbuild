@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+dependencies=(
+  'python-empy'
+  'python-vcstools'
+  'python-wstool'
+)
+yay -S --noconfirm --asdeps "${dependencies[@]}"
+
 packages_ordered=(
   'python-catkin-pkg'
   'python-rospkg'
@@ -15,6 +22,6 @@ packages_ordered=(
 
 for package in "${packages_ordered[@]}"; do
   pushd "${package}"
-  makepkg -fis
+  makepkg -fis --noconfirm
   popd
 done
