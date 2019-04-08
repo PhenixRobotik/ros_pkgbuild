@@ -7,6 +7,8 @@ packages_ordered=(
   'python-rosdep'
   'python-rosinstall'
   'python-rosinstall-generator'
+  'ros-build-tools'
+
 
 )
 

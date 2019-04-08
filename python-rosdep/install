@@ -1,0 +1,10 @@
+post_install() {
+  rosdep init
+}
+post_remove() {
+  rm -rf /etc/ros/rosdep
+}
+post_upgrade() {
+  post_remove
+  post_install
+}

@@ -20,8 +20,16 @@ makedepends=(
 conflicts=('python-rosdep')
 provides=('python-rosdep')
 arch=('any')
-source=('git+https://github.com/ros-infrastructure/rosdep')
-sha256sums=('SKIP')
+source=(
+  'git+https://github.com/ros-infrastructure/rosdep'
+  'install'
+)
+sha256sums=(
+  'SKIP'
+  '482819bb3d98b718d0e162d14bc1f1fa51db07d6933e8d6c5ea67bb0ff212ee0'
+)
+
+install='install'
 
 pkgver() {
   cd "rosdep"

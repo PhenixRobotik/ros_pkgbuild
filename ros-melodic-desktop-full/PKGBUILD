@@ -9,15 +9,15 @@ pkgrel=1
 license=('BSD')
 
 depends=(
-  'ros-melodic-desktop'
-  'ros-melodic-simulators'
-  'ros-melodic-perception'
-  'ros-melodic-urdf-sim-tutorial'
+  # 'ros-melodic-desktop'
+  # 'ros-melodic-simulators'
+  # 'ros-melodic-perception'
+  # 'ros-melodic-urdf-sim-tutorial'
 )
 makedepends=(
   'cmake'
-  'ros-build-tools'
-  'ros-melodic-catkin'
+  # 'ros-build-tools'
+  # 'ros-melodic-catkin'
 )
 
 # Git version (e.g. for debugging)
