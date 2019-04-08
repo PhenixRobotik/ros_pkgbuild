@@ -16,8 +16,8 @@ depends=(
 makedepends=(
   'python-setuptools'
 )
-conflicts=('python-catkin-pkg')
-provides=('python-catkin-pkg')
+conflicts=('python-catkin-pkg' 'python-catkin_pkg')
+provides=('python-catkin-pkg' 'python-catkin_pkg')
 arch=('any')
 source=('git+https://github.com/ros-infrastructure/catkin_pkg')
 sha256sums=('SKIP')

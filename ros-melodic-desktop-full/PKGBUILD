@@ -16,8 +16,8 @@ depends=(
 )
 makedepends=(
   'cmake'
-  # 'ros-build-tools'
-  # 'ros-melodic-catkin'
+  'ros-build-tools'
+  'ros-melodic-catkin'
 )
 
 # Git version (e.g. for debugging)

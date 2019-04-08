@@ -9,7 +9,8 @@ packages_ordered=(
   'python-rosinstall-generator'
   'ros-build-tools'
 
-
+  # Melodic distro
+  'ros-melodic-catkin'
 )
 
 for package in "${packages_ordered[@]}"; do

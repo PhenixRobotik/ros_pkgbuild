@@ -4,7 +4,7 @@ pkgname='ros-melodic-catkin-git'
 pkgdesc="ROS - Low-level build system macros and infrastructure for ROS."
 url='http://www.ros.org/wiki/catkin'
 license=('BSD')
-pkgver='0.0'
+pkgver=0.7.17.0.r0.gd968a7b2
 pkgrel=1
 
 depends=(
@@ -20,27 +20,37 @@ makedepends=(
 	'ros-build-tools'
 )
 
+conflicts=('python-melodic-catkin')
+provides=('python-melodic-catkin')
 arch=('any')
 source=('git+https://github.com/ros-gbp/catkin-release#branch=release/melodic/catkin')
 sha256sums=('SKIP')
 
+pkgver() {
+  cd "catkin-release"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s_release/melodic/catkin/__g'
+}
+
+
 build() {
+	cd "catkin-release"
+
 	# Use ROS environment variables.
 	source /usr/share/ros-build-tools/clear-ros-env.sh
 	[ -f /opt/ros/melodic/setup.bash ] && source /opt/ros/melodic/setup.bash
 
-	# Create the build directory.
-	[ -d ${srcdir}/build ] || mkdir ${srcdir}/build
-	cd ${srcdir}/build
-
 	# Fix Python2/Python3 conflicts.
-	/usr/share/ros-build-tools/fix-python-scripts.sh -v 3 ${srcdir}/${_dir}
+	/usr/share/ros-build-tools/fix-python-scripts.sh -v 3 "."
+
+	# Create the build directory.
+	mkdir -p build
+	cd build
 
 	# Build the project.
-	cmake ${srcdir}/${_dir} \
+	cmake .. \
+		-DCMAKE_INSTALL_PREFIX=/opt/ros/melodic \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCATKIN_BUILD_BINARY_PACKAGE=OFF \
-		-DCMAKE_INSTALL_PREFIX=/opt/ros/melodic \
 		-DPYTHON_EXECUTABLE=/usr/bin/python3 \
 		-DPYTHON_INCLUDE_DIR=/usr/include/python3.7m \
 		-DPYTHON_LIBRARY=/usr/lib/libpython3.7m.so \
@@ -50,6 +60,6 @@ build() {
 }
 
 package() {
-	cd "${srcdir}/build"
+	cd "catkin-release/build"
 	make DESTDIR="${pkgdir}/" install
 }
