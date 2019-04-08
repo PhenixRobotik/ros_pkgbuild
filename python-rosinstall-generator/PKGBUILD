@@ -1,0 +1,39 @@
+# Maintainer: Salamandar <felix@piedallu.me>
+
+pkgname='python-rosinstall-generator-git'
+pkgdesc="A tool for generating rosinstall files"
+url="http://wiki.ros.org/rosinstall_generator"
+license=('BSD')
+pkgver=0.1.16.r0.ga14f819
+pkgrel=1
+
+depends=(
+  'python'
+  'python-argparse'
+  'python-catkin-pkg'
+  'python-rosdistro'
+  'python-rospkg'
+  'python-yaml'
+)
+makedepends=(
+  'python-setuptools'
+)
+conflicts=('python-rosinstall-generator')
+provides=('python-rosinstall-generator')
+arch=('any')
+source=('git+https://github.com/ros-infrastructure/rosinstall_generator')
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "rosinstall_generator"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+build() {
+  cd "rosinstall_generator"
+  python setup.py build
+}
+
+package() {
+  cd "rosinstall_generator"
+  python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
+}

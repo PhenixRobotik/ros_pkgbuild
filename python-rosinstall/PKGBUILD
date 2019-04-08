@@ -1,0 +1,40 @@
+# Maintainer: Salamandar <felix@piedallu.me>
+
+pkgname='python-rosinstall-git'
+pkgdesc="The installer for ROS"
+url="http://wiki.ros.org/rosinstall"
+license=('BSD')
+pkgver=0.7.8.r12.g81e4505
+pkgrel=1
+
+depends=(
+  'python'
+  'python-catkin-pkg'
+  'python-rosdistro'
+  'python-vcstools'
+  'python-wstool'
+  'python-yaml'
+)
+makedepends=(
+  'python-setuptools'
+)
+conflicts=('python-rosinstall')
+provides=('python-rosinstall')
+arch=('any')
+source=('git+https://github.com/vcstools/rosinstall')
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "rosinstall"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "rosinstall"
+  python setup.py build
+}
+
+package() {
+  cd "rosinstall"
+  python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
+}

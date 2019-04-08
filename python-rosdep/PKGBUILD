@@ -1,0 +1,39 @@
+# Maintainer: Salamandar <felix@piedallu.me>
+
+pkgname='python-rosdep-git'
+pkgdesc="rosdep package manager abstraction tool for ROS"
+url="http://wiki.ros.org/rosdep"
+license=('BSD')
+pkgver=0.15.1.r0.gfe63aaa
+pkgrel=1
+
+depends=(
+  'python'
+  'python-catkin-pkg'
+  'python-rosdistro'
+  'python-rospkg'
+  'python-yaml'
+)
+makedepends=(
+  'python-setuptools'
+)
+conflicts=('python-rosdep')
+provides=('python-rosdep')
+arch=('any')
+source=('git+https://github.com/ros-infrastructure/rosdep')
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "rosdep"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "rosdep"
+  python setup.py build
+}
+
+package() {
+  cd "rosdep"
+  python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
+}

@@ -1,0 +1,37 @@
+# Maintainer: Salamandar <felix@piedallu.me>
+
+pkgname='python-rospkg-git'
+pkgdesc="ROS package library"
+url="http://wiki.ros.org/rospkg"
+license=('BSD')
+pkgver=1.1.7.r6.g337b61b
+pkgrel=1
+
+depends=(
+  'python'
+  'python-catkin-pkg'
+  'python-yaml'
+)
+makedepends=(
+  'python-setuptools'
+)
+conflicts=('python-rospkg')
+provides=('python-rospkg')
+arch=('any')
+source=('git+https://github.com/ros-infrastructure/rospkg')
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "rospkg"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "rospkg"
+  python setup.py build
+}
+
+package() {
+  cd "rospkg"
+  python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
+}

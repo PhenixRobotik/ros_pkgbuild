@@ -1,0 +1,38 @@
+# Maintainer: Salamandar <felix@piedallu.me>
+
+pkgname='python-rosdistro-git'
+pkgdesc="A tool to work with rosdistro files"
+url="http://wiki.ros.org/rosdistro"
+license=('BSD')
+pkgver=0.7.3.r1.ge03a868
+pkgrel=1
+
+depends=(
+  'python'
+  'python-catkin-pkg'
+  'python-rospkg'
+  'python-yaml'
+)
+makedepends=(
+  'python-setuptools'
+)
+conflicts=('python-rosdistro')
+provides=('python-rosdistro')
+arch=('any')
+source=('git+https://github.com/ros-infrastructure/rosdistro')
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "rosdistro"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "rosdistro"
+  python setup.py build
+}
+
+package() {
+  cd "rosdistro"
+  python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
+}

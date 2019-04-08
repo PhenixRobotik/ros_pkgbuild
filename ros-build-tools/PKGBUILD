@@ -1,0 +1,50 @@
+# Maintainer: Salamandar <felix@piedallu.me>
+# Contributor: Benjamin Chretien <chretien+aur at lirmm dot fr>
+# Contributor: Sean Greenslade <zootboysean@gmail.com>
+
+
+pkgname='ros-build-tools'
+pkgdesc='Utilities for building arch packages for ROS stacks.'
+url="https://github.com/bchretien/arch-ros-stacks"
+license=('BSD')
+pkgver='0.0'
+pkgrel=1
+
+arch=('any')
+depends=()
+makedepends=()
+
+
+source=(
+  'clear-ros-env.sh'
+  'create-arch-ros-package-legacy.sh'
+  'fix-python-scripts.sh'
+  'generate_packages_makefile.py'
+  'generate-python-patch.sh'
+  'get_stack_dependencies.py'
+  'install_generated_packages.py'
+  'PKGBUILD.rostemplate'
+  'stack-install-tools.sh'
+)
+sha256sums=(
+  'e71cdd2288bf3a659fa40824464e64031d2ec45fab57f120d8c49b92954d5ad5'
+  '2142be53f86743e7bc5c3c96e2838700d0679e55c1999b68e04c137f14c9b9c4'
+  'dc9bf582de8f0e157a8b8c85dbb0f2e1c7cbcbc7a092e8065a1d828330667c48'
+  '6a182082c41fc40632caf86d174252d3abb1f9e9ed4c2b5a793dcf6f4e913775'
+  '8f4e23c2e9716f73c1e77836aa6bcae4613c08f59cceb85b15c4b2fa0751ff11'
+  '39e96f2c9586f97e3ebd73df665e2a17cf7e06c4e01efbbd3d52e8948b793b28'
+  '6204e4b3db5249af79738a89ba47fbdf222b977d77a77e621e05dde19b3154e5'
+  '579fbfbdf7f332e5f941095ea72ffc68b94e9bcf1461eb0b2cdfb9498d0bec7d'
+  '8501e110aff9c1370975f1e6339da35571533d9e4c61d6a864baf1a663a8851f'
+)
+
+build() {
+  :
+}
+
+pkg_destination_dir="/usr/share/ros-build-tools"
+
+package() {
+  mkdir -p "${pkgdir}${pkg_destination_dir}"
+  cp "${source[@]}" "${pkgdir}${pkg_destination_dir}"
+}

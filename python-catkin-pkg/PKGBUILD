@@ -1,0 +1,38 @@
+# Maintainer: Salamandar <felix@piedallu.me>
+
+pkgname='python-catkin-pkg-git'
+pkgdesc="catkin package library"
+url="http://wiki.ros.org/catkin_pkg"
+license=('BSD')
+pkgver=0.4.11.r0.g5037385
+pkgrel=1
+
+depends=(
+  'python'
+  'python-argparse'
+  'python-dateutil'
+  'python-docutils'
+)
+makedepends=(
+  'python-setuptools'
+)
+conflicts=('python-catkin-pkg')
+provides=('python-catkin-pkg')
+arch=('any')
+source=('git+https://github.com/ros-infrastructure/catkin_pkg')
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "catkin_pkg"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "catkin_pkg"
+  python setup.py build
+}
+
+package() {
+  cd "catkin_pkg"
+  python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
+}
