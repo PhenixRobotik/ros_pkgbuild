@@ -49,7 +49,7 @@ packages_ordered=(
 
 for package in "${packages_ordered[@]}"; do
   if [[ ! -d "${package}" ]]; then
-    git clone 'https://aur.archlinux.org/ros-melodic-roslaunch.git' "${package}"
+    git clone "https://aur.archlinux.org/${package}.git" "${package}"
   else
     git -C "${package}" pull
   fi
